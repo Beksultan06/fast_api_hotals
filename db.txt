@@ -46,6 +46,14 @@ TABLE USER
 
 TABLE HOTELS
 
+
+
+
+
+
+бля я ошибся нахуй совет не трогайте папку migrations которая стоит за папкой app
+
+
 1	"Amargo Janos"	"Apt 1487"		2	1
 2	"Egon Bindley"	"Suite 8"		3	2
 3	"Anthe Backe"	"Suite 42"		2	3
