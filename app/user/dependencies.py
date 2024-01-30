@@ -1,9 +1,10 @@
-from fastapi import Depends, Request, HTTPException,status
+from fastapi import Depends, Request, HTTPException, status
 from jose import jwt, JWTError
 from app.config import settings
 from datetime import datetime
 
 from app.user.dao import UsersDAO
+from app.user.models import Users
 
 
 def get_token(request: Request):
@@ -15,10 +16,13 @@ def get_token(request: Request):
 
 async def get_current_user(token: str = Depends(get_token)):
     try:
+        print(f"Token: {token}")
         payload = jwt.decode(
             token, settings.SECRET_KEY, settings.ALGORITNM
         )
-    except JWTError:
+        print(f"Decoded Payload: {payload}")
+    except JWTError as e:
+        print(f"Error decoding token: {e}")
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     expire: str = payload.get("exp")
     if  (not expire) or (int(expire) < datetime.utcnow().timestamp()):
